@@ -1,0 +1,19 @@
+{% extends 'index.twig' %}
+{% block contents %}
+
+    {% if exposures.getExposures %}
+
+        {% for exposure in exposures.getExposures %}
+            ID:<a href="/view/{{ exposure.id }}">{{ exposure.id }}</a><br/>
+        {% endfor %}
+
+    {% else %}
+
+        No History Yet!
+
+    {% endif %}
+
+    <br/>
+    <a href="/">Back to Calculator</a>
+
+{% endblock %}

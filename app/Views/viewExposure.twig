@@ -1,0 +1,21 @@
+{% extends 'index.twig' %}
+{% block contents %}
+
+    {% if exposure is defined %}
+        ID: {{ exposure.id }} <br/>
+        ISO: {{ exposure.ISO }} <br/>
+        Aperture: F/{{ exposure.aperture }} <br/>
+        Shutter Speed: {{ exposure.shutterSpeed }} <br/>
+        Calculated Exposure Value: {{ exposureValue }} EV
+
+        <form action="/delete/{{ exposure.id }}" method="post">
+            <button name="delete" id="delete">Delete</button>
+        </form>
+
+    {% else %}
+        Nothing to see here!
+    {% endif %}
+
+    <a href="/history">Back to History</a>
+
+{% endblock %}
