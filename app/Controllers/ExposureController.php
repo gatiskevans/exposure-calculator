@@ -3,12 +3,14 @@
 namespace App\Controllers;
 
 use App\Calculator\ExposureCalculator;
+use App\DD;
 use App\Descriptions\ExposureValueDescriptions;
 use App\Models\Exposure;
 use App\Redirect\Redirect;
 use App\Repositories\CsvExposuresRepository;
 use App\Repositories\ExposuresRepository;
 use App\Twig\TwigView;
+use App\Validation\Exceptions\FormValidationException;
 use App\Validation\Validation;
 use Ramsey\Uuid\Uuid;
 
@@ -48,28 +50,30 @@ class ExposureController extends Validation
             ]);
     }
 
-    public function calculateExposure(): TwigView
+    public function calculateExposure(): void
     {
-        if(!isset($_POST)){
+        try {
+            $shutter = $this->validateShutter($_POST['shutter']);
+            $_POST['shutter'] = $shutter == 0 ? "Not a number" : $shutter;
+            $this->validateData($_POST);
+
+            $exposure = new Exposure(Uuid::uuid4(), $_POST['iso'], $_POST['aperture'], $shutter);
+            $result = (new ExposureCalculator($exposure))->calculate();
+
+            $evDescription = ExposureValueDescriptions::getDescription($result);
+
+            $this->exposuresRepository->save($exposure, $result);
+
+            $_SESSION['form_data'] = [$_POST['iso'], $_POST['aperture'], $shutter];
+            $_SESSION['result'] = $result;
+            $_SESSION['description'] = $evDescription;
+            Redirect::to('/');
+
+        } catch (FormValidationException $exception)
+        {
+            $_SESSION['_errors'] = $this->getErrors();
             Redirect::to('/');
         }
-
-        $shutter = $this->validateShutter($_POST['shutter']);
-
-        $exposure = new Exposure(Uuid::uuid4(), $_POST['iso'], $_POST['aperture'], $shutter);
-        $result = (new ExposureCalculator($exposure))->calculate();
-
-        $evDescription = ExposureValueDescriptions::getDescription($result);
-
-        $this->exposuresRepository->save($exposure, $result);
-
-        return new TwigView('calculator.twig', [
-            'result' => $result,
-            'iso' => $_POST['iso'],
-            'aperture' => $_POST['aperture'],
-            'shutterSpeed' => $shutter,
-            'description' => $evDescription
-        ]);
     }
 
     public function delete(array $vars): void

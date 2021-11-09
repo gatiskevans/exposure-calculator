@@ -10,6 +10,7 @@ session_start();
 
 $loader = new FilesystemLoader('app/Views');
 $twigEngine = new Environment($loader);
+$twigEngine->addGlobal('session', $_SESSION);
 
 $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->addRoute('GET', '/', 'ExposureController@index');
@@ -53,4 +54,6 @@ switch ($routeInfo[0]) {
 }
 
 unset($_SESSION['_errors']);
-unset($_SESSION['ev']);
+unset($_SESSION['form_data']);
+unset($_SESSION['result']);
+unset($_SESSION['description']);
