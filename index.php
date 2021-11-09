@@ -16,7 +16,7 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->addRoute('GET', '/', 'ExposureController@index');
     $r->addRoute('POST', '/', 'ExposureController@calculateExposure');
     $r->addRoute('GET', '/history', 'ExposureController@showHistory');
-    $r->addRoute('GET', '/{id}', 'ExposureController@showExposure');
+    $r->addRoute('GET', '/view/{id}', 'ExposureController@showExposure');
     $r->addRoute('POST', '/delete/{id}', 'ExposureController@delete');
 });
 
