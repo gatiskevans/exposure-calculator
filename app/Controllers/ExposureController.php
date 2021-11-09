@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use App\Calculator\ExposureCalculator;
-use App\DD;
 use App\Descriptions\ExposureValueDescriptions;
 use App\Models\Exposure;
 use App\Redirect\Redirect;
@@ -41,13 +40,7 @@ class ExposureController extends Validation
         if ($id == null) header('Location: /');
 
         $exposure = $this->exposuresRepository->getOne($id);
-        $exposureValue = $this->exposuresRepository->getExposureValue($id);
-        return new TwigView('viewExposure.twig',
-            [
-                'exposure' => $exposure,
-                'exposureValue' => $exposureValue,
-                'description' => ExposureValueDescriptions::getDescription($exposureValue)
-            ]);
+        return new TwigView('viewExposure.twig', ['exposure' => $exposure]);
     }
 
     public function calculateExposure(): void
@@ -58,15 +51,15 @@ class ExposureController extends Validation
             $this->validateData($_POST);
 
             $exposure = new Exposure(Uuid::uuid4(), $_POST['iso'], $_POST['aperture'], $shutter);
-            $result = (new ExposureCalculator($exposure))->calculate();
+            $exposure->setExposureValue((new ExposureCalculator($exposure))->calculate());
 
-            $evDescription = ExposureValueDescriptions::getDescription($result);
+            $exposure->setDescription(ExposureValueDescriptions::getDescription($exposure->getExposureValue()));
 
-            $this->exposuresRepository->save($exposure, $result);
+            $this->exposuresRepository->save($exposure, $exposure->getExposureValue());
 
             $_SESSION['form_data'] = [$_POST['iso'], $_POST['aperture'], $shutter];
-            $_SESSION['result'] = $result;
-            $_SESSION['description'] = $evDescription;
+            $_SESSION['result'] = $exposure->getExposureValue();
+            $_SESSION['description'] = $exposure->getDescription();
             Redirect::to('/');
 
         } catch (FormValidationException $exception)

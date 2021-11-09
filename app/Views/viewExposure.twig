@@ -26,8 +26,8 @@
                     <p>ISO: {{ exposure.ISO }}</p>
                     <p>Aperture: F/{{ exposure.aperture }}</p>
                     <p>Shutter Speed: {{ exposure.shutterSpeed }}</p>
-                    <p>Calculated Exposure Value: {{ exposureValue }} EV</p>
-                    <p>Good for: {{ description }}</p>
+                    <p>Calculated Exposure Value: {{ exposure.exposureValue }} EV</p>
+                    <p>Good for: {{ exposure.description }}</p>
                 </div>
 
             <form action="/delete/{{ exposure.id }}" method="post">

@@ -2,8 +2,6 @@
 
 namespace App\Repositories;
 
-use App\Calculator\ExposureCalculator;
-use App\Descriptions\ExposureValueDescriptions;
 use App\Models\Exposure;
 use App\Models\ExposuresCollection;
 use League\Csv\Reader;
@@ -31,8 +29,8 @@ class CsvExposuresRepository implements ExposuresRepository
             $exposure->getISO(),
             $exposure->getAperture(),
             $exposure->getShutterSpeed(),
-            $result,
-            ExposureValueDescriptions::getDescription($result)
+            $exposure->getExposureValue(),
+            $exposure->getDescription()
         ]);
     }
 
@@ -45,7 +43,9 @@ class CsvExposuresRepository implements ExposuresRepository
                 $exposure[0],
                 $exposure[1],
                 $exposure[2],
-                (float) $exposure[3]
+                (float) $exposure[3],
+                $exposure[4],
+                $exposure[5]
             ));
         }
 
@@ -68,7 +68,9 @@ class CsvExposuresRepository implements ExposuresRepository
             $exposure[0],
             $exposure[1],
             $exposure[2],
-            $exposure[3]
+            $exposure[3],
+            $exposure[4],
+            $exposure[5]
         );
     }
 
@@ -95,14 +97,13 @@ class CsvExposuresRepository implements ExposuresRepository
         $tempExposures = [];
 
         foreach($exposures->getExposures() as $exposure){
-            $exposureValue = (new ExposureCalculator($exposure))->calculate();
             $tempExposures[] = [
                 $exposure->getId(),
                 $exposure->getISO(),
                 $exposure->getAperture(),
                 $exposure->getShutterSpeed(),
-                $exposureValue,
-                ExposureValueDescriptions::getDescription($exposureValue)
+                $exposure->getExposureValue(),
+                $exposure->getDescription()
             ];
         }
 
