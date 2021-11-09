@@ -1,0 +1,6 @@
+{% if session.result is defined %}
+    <div class="results">
+        <p>Calculated Exposure Value: <b>{{ session.result }} EV</b><br/></p>
+        <p>Good for: {{ session.description }}<br/></p>
+    </div>
+{% endif %}

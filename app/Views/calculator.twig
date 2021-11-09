@@ -5,26 +5,23 @@
 
     <form action="/" method="post">
         <label for="iso">Enter ISO: </label>
-        <input type="text" id="iso" name="iso" placeholder="e.g. 200" value="{{ iso }}" />
+        <input type="text" id="iso" name="iso" placeholder="e.g. 200" value="{{ session.form_data[0] }}" />
 
         <label for="aperture">Enter Aperture: </label>
-        <input type="text" id="aperture" name="aperture" placeholder="e.g. 5.6" value="{{ aperture }}" />
+        <input type="text" id="aperture" name="aperture" placeholder="e.g. 5.6" value="{{ session.form_data[1] }}" />
 
         <label for="shutter">Enter Shutter Speed: </label>
-        <input type="text" id="shutter" name="shutter" placeholder="e.g. 1/500" value="{{ shutterSpeed }}" />
+        <input type="text" id="shutter" name="shutter" placeholder="e.g. 1/500" value="{{ session.form_data[2] }}" />
 
         <input type="submit" name="submit" value="Calculate" />
     </form>
 
+    {% include 'Responses/results.twig' %}
+
+    {% include 'Responses/errors.twig' %}
+
+    <a class="navigation" href="/history">See History</a>
+
 </div>
-
-    {% if result is defined %}
-
-        {{ result }} EV<br/>
-        Good for: {{ description }}<br/>
-
-    {% endif %}
-
-    <a href="/history">See History</a>
 
 {% endblock %}

@@ -1,0 +1,82 @@
+.calculator {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    margin: auto;
+    width: 30%;
+}
+
+.response, .results {
+    margin-top: 10px;
+}
+
+.history {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    margin: auto;
+    width: 30%;
+}
+
+.information {
+    background-color: green;
+    color: red;
+}
+
+.contents {
+    padding: 5px;
+    margin: 3px;
+    border: 1px solid black;
+    border-radius: 4px;
+}
+
+.records {
+    text-decoration: none;
+    color: #04AA6D;
+    padding: 5px;
+}
+
+.records:hover {
+    color: #013220;
+}
+
+.navigation {
+    margin-top: 20px;
+    background-color: #04AA6D;
+    border-radius: 4px;
+    color: white;
+    padding: 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.navigation:hover {
+    background-color: #45a049;
+}
+
+body {font-family: Arial, Helvetica, sans-serif;}
+
+input[type=text], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+}
+
+input[type=submit] {
+    background-color: #04AA6D;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}

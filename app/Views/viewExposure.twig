@@ -1,22 +1,60 @@
 {% extends 'index.twig' %}
 {% block contents %}
 
-    {% if exposure is defined %}
-        ID: {{ exposure.id }} <br/>
-        ISO: {{ exposure.ISO }} <br/>
-        Aperture: F/{{ exposure.aperture }} <br/>
-        Shutter Speed: {{ exposure.shutterSpeed }} <br/>
-        Calculated Exposure Value: {{ exposureValue }} EV <br/>
-        Good for: {{ description }}
+    <div
+            class="container"
+            style=" border-radius: 5px;
+                    background-color: #f2f2f2;
+                    padding: 20px;
+                    margin: auto;
+                    width: 30%;"
+    >
 
-        <form action="/delete/{{ exposure.id }}" method="post">
-            <button name="delete" id="delete">Delete</button>
-        </form>
+        {% if exposure is defined %}
 
-    {% else %}
-        Nothing to see here!
-    {% endif %}
+            <h1>Exposure</h1>
 
-    <a href="/history">Back to History</a>
+            <div class="information"
+                style="
+                font-weight: bold;
+                border: 1px solid black;
+                border-radius: 4px;
+                padding: 5px 10px;
+                margin-bottom: 15px;">
+                
+                    <p>ID: {{ exposure.id }}</p>
+                    <p>ISO: {{ exposure.ISO }}</p>
+                    <p>Aperture: F/{{ exposure.aperture }}</p>
+                    <p>Shutter Speed: {{ exposure.shutterSpeed }}</p>
+                    <p>Calculated Exposure Value: {{ exposureValue }} EV</p>
+                    <p>Good for: {{ description }}</p>
+                </div>
+
+            <form action="/delete/{{ exposure.id }}" method="post">
+                <button
+                        style="color: red;"
+                        name="delete"
+                        id="delete"
+                        onclick="return confirm('Are you sure?')"
+                >Delete</button>
+            </form>
+
+        {% else %}
+            Nothing to see here!
+        {% endif %}
+
+        <a
+                class="navigation"
+                href="/history" style=" margin-top: 20px;
+                                        background-color: #04AA6D;
+                                        border-radius: 4px;
+                                        color: white;
+                                        padding: 8px;
+                                        text-align: center;
+                                        text-decoration: none;
+                                        display: inline-block;"
+        >Back to History</a>
+
+    </div>
 
 {% endblock %}

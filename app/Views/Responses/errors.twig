@@ -1,0 +1,5 @@
+{% for error in session._errors %}
+    <div class="response">
+        <div style="color:red;">{{ error }}</div><br/>
+    </div>
+{% endfor %}
