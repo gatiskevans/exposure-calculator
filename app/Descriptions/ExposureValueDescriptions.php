@@ -7,7 +7,7 @@ class ExposureValueDescriptions
     public static function getDescription(int $ev): string
     {
         switch($ev){
-            case $ev === -7:
+            case $ev <= -7:
                 $description = "Deep star field or the Milky Way.";
                 break;
             case $ev === -6:

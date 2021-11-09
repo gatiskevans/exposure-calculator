@@ -20,7 +20,7 @@ class ExposureController extends Validation
 
     public function __construct()
     {
-        $this->exposuresRepository = new CsvExposuresRepository('Storage/exposures.csv');
+        $this->exposuresRepository = new CsvExposuresRepository('exposures.csv');
     }
 
     public function index(): TwigView
