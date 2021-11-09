@@ -2,7 +2,6 @@
 
 namespace App\Calculator;
 
-use App\DD;
 use App\Models\Exposure;
 
 class ExposureCalculator

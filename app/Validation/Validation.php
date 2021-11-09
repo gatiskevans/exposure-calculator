@@ -2,8 +2,6 @@
 
 namespace App\Validation;
 
-use App\DD;
-
 class Validation
 {
     public function validateData(array $data): void

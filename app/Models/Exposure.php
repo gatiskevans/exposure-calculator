@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use Ramsey\Uuid\Nonstandard\Uuid;
-
 class Exposure
 {
     private string $id;
