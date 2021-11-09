@@ -6,7 +6,8 @@
         ISO: {{ exposure.ISO }} <br/>
         Aperture: F/{{ exposure.aperture }} <br/>
         Shutter Speed: {{ exposure.shutterSpeed }} <br/>
-        Calculated Exposure Value: {{ exposureValue }} EV
+        Calculated Exposure Value: {{ exposureValue }} EV <br/>
+        Good for: {{ description }}
 
         <form action="/delete/{{ exposure.id }}" method="post">
             <button name="delete" id="delete">Delete</button>
