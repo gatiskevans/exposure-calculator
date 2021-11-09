@@ -1,33 +1,6 @@
 {% extends 'index.twig' %}
 {% block contents %}
 
-    <style>
-        .container{
-            border-radius: 5px;
-            background-color: #f2f2f2;
-            padding: 20px;
-            margin: auto;
-            width: 30%;
-        }
-        .information {
-            font-weight: bold;
-            border: 1px solid black;
-            border-radius: 4px;
-            padding: 5px 10px;
-            margin-bottom: 15px;
-        }
-        .navigation {
-            margin-top: 20px;
-            background-color: #04AA6D;
-            border-radius: 4px;
-            color: white;
-            padding: 8px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-        }
-    </style>
-
 <div class="container">
 
     {% if exposure is defined %}
