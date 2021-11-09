@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use App\Calculator\ExposureCalculator;
-use App\DD;
+use App\Descriptions\ExposureValueDescriptions;
 use App\Models\Exposure;
 use App\Redirect\Redirect;
 use App\Repositories\CsvExposuresRepository;
@@ -23,7 +23,7 @@ class ExposureController extends Validation
 
     public function index(): TwigView
     {
-        return new TwigView('form.twig');
+        return new TwigView('calculator.twig');
     }
 
     public function showHistory(): TwigView
@@ -43,7 +43,8 @@ class ExposureController extends Validation
         return new TwigView('viewExposure.twig',
             [
                 'exposure' => $exposure,
-                'exposureValue' => $exposureValue
+                'exposureValue' => $exposureValue,
+                'description' => ExposureValueDescriptions::getDescription($exposureValue)
             ]);
     }
 
@@ -58,13 +59,16 @@ class ExposureController extends Validation
         $exposure = new Exposure(Uuid::uuid4(), $_POST['iso'], $_POST['aperture'], $shutter);
         $result = (new ExposureCalculator($exposure))->calculate();
 
+        $evDescription = ExposureValueDescriptions::getDescription($result);
+
         $this->exposuresRepository->save($exposure, $result);
 
-        return new TwigView('form.twig', [
+        return new TwigView('calculator.twig', [
             'result' => $result,
             'iso' => $_POST['iso'],
             'aperture' => $_POST['aperture'],
-            'shutterSpeed' => $shutter
+            'shutterSpeed' => $shutter,
+            'description' => $evDescription
         ]);
     }
 
