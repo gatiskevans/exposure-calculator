@@ -29,4 +29,5 @@ In order to run the program:
 * PHP 7.4 or higher
 * Composer installed
 * Run `composer install` within the same folder where composer.json file is located
+* Run `php -S localhost:8000` to start the server on your local machine
 * Enjoy!
