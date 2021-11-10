@@ -25,7 +25,7 @@ If there's no history the CSV file will be created.
 Program uses MVC software design pattern.
 
 In order to run the program:
-* [Download the project](https://github.com/ReinisD3/CollageMaker/archive/refs/heads/master.zip)
+* [Download the project](https://github.com/gatiskevans/exposure-calculator/archive/refs/heads/main.zip)
 * PHP 7.4 or higher
 * Composer installed
 * Run `composer install` within the same folder where composer.json file is located
